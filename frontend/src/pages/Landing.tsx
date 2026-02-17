@@ -153,7 +153,7 @@ export default function Landing() {
               className="relative hidden lg:block"
             >
               <img
-                src="https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=600"
+                src="https://plus.unsplash.com/premium_photo-1731356519585-b313acc60fc6?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                 alt="Farmer with smartphone in field"
                 className="rounded-2xl shadow-2xl shadow-slate-300/50 border border-white/60 w-full object-cover aspect-[4/3]"
               />
@@ -169,22 +169,36 @@ export default function Landing() {
 
       {/* ─────────────────────────────────────────────────────────────────────
           2. CALCULATOR CARD (CENTERPIECE)
+          NOTE: Background image + overlay are layered behind the form using
+          relative/absolute positioning so we don't affect form layout or logic.
           ───────────────────────────────────────────────────────────────────── */}
-      <section className="max-w-6xl mx-auto px-4 sm:px-6 py-16 sm:py-20">
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-12"
-        >
-          <h2 className="font-heading text-3xl sm:text-4xl font-bold text-slate-900">
-            Try it now
-          </h2>
-          <p className="mt-3 text-slate-600 max-w-xl mx-auto">
-            Enter your details below. We’ll use live government data to find your best mandi.
-          </p>
-        </motion.div>
-        <CalculatorCard />
+      <section
+        id="calculator"
+        className="relative overflow-hidden"
+      >
+        {/* Background image behind the calculator section */}
+        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1687770917377-b5f588761121?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')] bg-cover bg-center" />
+
+        {/* Semi-transparent dark overlay to keep text readable on top of the photo */}
+        <div className="absolute inset-0 bg-slate-900/55" />
+
+        {/* Content wrapper stays above background layers and keeps existing spacing & width */}
+        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 py-16 sm:py-20">
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <h2 className="font-heading text-3xl sm:text-4xl font-bold text-white">
+              Try it now
+            </h2>
+            <p className="mt-3 text-slate-100 max-w-xl mx-auto">
+              Enter your details below. We’ll use live government data to find your best mandi.
+            </p>
+          </motion.div>
+          <CalculatorCard />
+        </div>
       </section>
 
       {/* ─────────────────────────────────────────────────────────────────────
@@ -301,7 +315,7 @@ export default function Landing() {
               className="relative rounded-2xl overflow-hidden border border-slate-200 bg-white shadow-xl"
             >
               <img
-                src="https://images.unsplash.com/photo-1592502230717-6d1b2e64d43a?w=800"
+                src="https://plus.unsplash.com/premium_photo-1732139715621-6f5a0f7e1435?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                 alt="Truck transporting produce"
                 className="w-full h-72 object-cover"
               />
@@ -377,7 +391,7 @@ export default function Landing() {
             </blockquote>
             <div className="mt-8 flex flex-wrap gap-8 items-center">
               <img
-                src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=120"
+                src="https://plus.unsplash.com/premium_photo-1679439054783-6dadaaa9e537?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                 alt="Farmer"
                 className="w-16 h-16 rounded-full object-cover border-4 border-primary-light"
               />
