@@ -226,7 +226,21 @@ const InputForm: React.FC = () => {
             disabled={isLoading}
             style={isLoading ? styles.buttonDisabled : styles.button}
           >
-            {isLoading ? 'Calculating...' : 'Find Best Mandi'}
+            {isLoading ? (
+              <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <span style={{ 
+                  width: '16px', 
+                  height: '16px', 
+                  border: '2px solid transparent', 
+                  borderTop: '2px solid white', 
+                  borderRight: '2px solid white', 
+                  borderBottom: '2px solid white', 
+                  borderRadius: '50%', 
+                  animation: 'spin 1s linear infinite' 
+                }}></span>
+                Calculating...
+              </span>
+            ) : 'Find Best Mandi'}
           </button>
         </form>
       </div>
