@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useMap } from 'react-leaflet';
+import L from 'leaflet';
 import type { LatLngExpression } from 'leaflet';
 
 interface MapBoundsProps {

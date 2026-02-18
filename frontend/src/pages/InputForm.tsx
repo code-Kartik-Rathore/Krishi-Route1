@@ -51,7 +51,7 @@ const InputForm: React.FC = () => {
           }));
           setError('');
         },
-        (error) => {
+        () => {
           setError('Unable to get your location. Please enter manually.');
         }
       );

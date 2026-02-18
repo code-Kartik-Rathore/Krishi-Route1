@@ -41,7 +41,7 @@ const Dashboard: React.FC = () => {
     return null;
   }
 
-  const { bestMandi, results, farmerLocation, crop, quantity, vehicle, totalMandisFound, dataSource } = state;
+  const { bestMandi, results, crop, quantity, vehicle, totalMandisFound, dataSource } = state;
 
   const chartData = results.map(result => ({
     mandi: result.mandi,
