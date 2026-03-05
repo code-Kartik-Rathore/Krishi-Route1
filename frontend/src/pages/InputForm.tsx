@@ -6,7 +6,7 @@ interface FormData {
   quantity: number;
   vehicle: string;
   locationSearch: string;
-  farmerLocation: { lat: number; lng: number };
+  farmerLocation: { lat: number; lng: number; state?: string };
 }
 
 const InputForm: React.FC = () => {
@@ -16,7 +16,7 @@ const InputForm: React.FC = () => {
     quantity: 10,
     vehicle: 'Tata Ace',
     locationSearch: '',
-    farmerLocation: { lat: 28.6139, lng: 77.2090 } // Default to Delhi
+    farmerLocation: { lat: 28.6139, lng: 77.2090, state: 'delhi' } // Default to Delhi
   });
 
   const [isLoading, setIsLoading] = useState(false);

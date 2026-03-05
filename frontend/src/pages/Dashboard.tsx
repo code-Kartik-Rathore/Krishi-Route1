@@ -13,7 +13,9 @@ interface DashboardState {
     profit: number;
     revenue: number;
     transportCost: number;
+    fuelCost: number;
     handlingCost: number;
+    dieselPrice: number;
     price: number;
     minPrice?: number;
     maxPrice?: number;
@@ -107,7 +109,9 @@ const Dashboard: React.FC = () => {
             profit={result.profit}
             revenue={result.revenue}
             transportCost={result.transportCost}
+            fuelCost={result.fuelCost}
             handlingCost={result.handlingCost}
+            dieselPrice={result.dieselPrice}
             price={result.price}
             minPrice={result.minPrice}
             maxPrice={result.maxPrice}

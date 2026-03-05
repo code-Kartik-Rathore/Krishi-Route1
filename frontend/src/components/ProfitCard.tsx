@@ -8,7 +8,9 @@ interface ProfitCardProps {
   profit: number;
   revenue: number;
   transportCost: number;
+  fuelCost: number;
   handlingCost: number;
+  dieselPrice: number;
   price: number;
   minPrice?: number;
   maxPrice?: number;
@@ -26,7 +28,9 @@ const ProfitCard: React.FC<ProfitCardProps> = ({
   profit,
   revenue,
   transportCost,
+  fuelCost,
   handlingCost,
+  dieselPrice,
   price,
   minPrice,
   maxPrice,
@@ -64,6 +68,14 @@ const ProfitCard: React.FC<ProfitCardProps> = ({
         <div style={styles.detailRow}>
           <span style={styles.label}>Transport Cost:</span>
           <span style={styles.value}>₹{transportCost.toLocaleString('en-IN')}</span>
+        </div>
+        <div style={styles.detailRow}>
+          <span style={styles.label}>Fuel Cost:</span>
+          <span style={styles.value}>₹{fuelCost.toLocaleString('en-IN')}</span>
+        </div>
+        <div style={styles.detailRow}>
+          <span style={styles.label}>Diesel Price:</span>
+          <span style={styles.value}>₹{dieselPrice}/liter</span>
         </div>
         <div style={styles.detailRow}>
           <span style={styles.label}>Handling Cost:</span>

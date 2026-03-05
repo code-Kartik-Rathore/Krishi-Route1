@@ -8,7 +8,7 @@ const fetch = require('node-fetch');
 // ----------------------------
 const SHORTLIST_LIMIT = 5;
 const HANDLING_COST = 500;
-const OSRM_TIMEOUT_MS = 3000;
+const OSRM_TIMEOUT_MS = 2000;
 
 // ----------------------------
 // IN-MEMORY CACHES
@@ -16,6 +16,7 @@ const OSRM_TIMEOUT_MS = 3000;
 let mandiDataCache = [];
 const mandiCoordinatesCache = new Map();
 const distanceCache = new Map();
+const fuelPriceCache = new Map();
 
 // ----------------------------
 // STATIC COORDINATES (LOWERCASE KEYS)
@@ -34,6 +35,12 @@ const vehicleRates = {
   'Tractor': 15,
   'Tata Ace': 20,
   'Truck': 35
+};
+
+const vehicleFuelEfficiency = {
+  'Tractor': 4,    // km per liter
+  'Tata Ace': 8,   // km per liter
+  'Truck': 6       // km per liter
 };
 
 // ----------------------------
@@ -74,6 +81,73 @@ async function loadMandiPricesOnce() {
 }
 
 loadMandiPricesOnce();
+
+// ----------------------------
+// FUEL PRICE API
+// ----------------------------
+async function getDieselPrice(location, locationType = 'state') {
+  const cacheKey = `${location}-${locationType}`;
+  
+  if (fuelPriceCache.has(cacheKey)) {
+    return fuelPriceCache.get(cacheKey);
+  }
+
+  try {
+    const apiKey = process.env.FUEL_PRICE_API_KEY;
+    console.log('Fuel API Key:', apiKey);
+    const url = `https://fuel.indianapi.in/live_fuel_price?fuel_type=diesel&location_type=${locationType}&location=${encodeURIComponent(location)}`;
+    console.log('Fuel API URL:', url);
+    
+    const response = await fetch(url, {
+      headers: {
+        'x-api-key': apiKey
+      }
+    });
+    const data = await response.json();
+    console.log('Fuel API Response:', data);
+    
+    if (data && data.length > 0) {
+      // Find the matching location in the response
+      const locationData = data.find(item => 
+        item.city && item.city.toLowerCase() === location.toLowerCase()
+      );
+      
+      if (locationData && locationData.price) {
+        const dieselPrice = parseFloat(locationData.price);
+        fuelPriceCache.set(cacheKey, dieselPrice);
+        return dieselPrice;
+      }
+    }
+    
+    // Fallback to average diesel price if API fails or location not found
+    console.log('Fuel API failed or location not found, using fallback price');
+    const fallbackPrice = 90; // Average diesel price in India
+    fuelPriceCache.set(cacheKey, fallbackPrice);
+    return fallbackPrice;
+    
+  } catch (error) {
+    console.error('Error fetching diesel price:', error);
+    // Fallback to state-based average diesel prices for demo
+    const statePrices = {
+      'delhi': 94.5,
+      'maharashtra': 96.2,
+      'gujarat': 93.8,
+      'rajasthan': 92.1,
+      'punjab': 95.3,
+      'uttar pradesh': 91.7,
+      'karnataka': 97.4,
+      'tamil nadu': 98.1,
+      'west bengal': 90.5,
+      'bihar': 89.8
+    };
+    
+    const locationLower = location.toLowerCase();
+    const fallbackPrice = statePrices[locationLower] || 90;
+    console.log(`Using fallback price for ${location}: ₹${fallbackPrice}`);
+    fuelPriceCache.set(cacheKey, fallbackPrice);
+    return fallbackPrice;
+  }
+}
 
 // ----------------------------
 // HELPERS
@@ -130,8 +204,17 @@ async function getDistance(fromLng, fromLat, toLng, toLat) {
     throw new Error('No route found');
   } catch (error) {
     clearTimeout(timeout);
-    console.error('OSRM Error:', error.message);
-    throw error;
+    
+    // If OSRM fails, fallback to haversine distance
+    console.warn('OSRM failed, using haversine fallback:', error.message);
+    const fallbackDistance = haversine(fromLat, fromLng, toLat, toLat);
+    const result = {
+      distance: fallbackDistance,
+      geometry: null
+    };
+    
+    distanceCache.set(key, result);
+    return result;
   }
 }
 
@@ -213,6 +296,9 @@ router.post('/calculate-profit', async (req, res) => {
 
     // 2️⃣ Estimate profit using Haversine
     const estimatedMandis = [];
+    
+    // Get diesel price for the farmer's state
+    const dieselPrice = await getDieselPrice(farmerLocation.state || 'delhi', 'state');
 
     for (const mandi of relevantMandis) {
       const coordinates = await getMandiCoordinates(
@@ -231,7 +317,13 @@ router.post('/calculate-profit', async (req, res) => {
       );
 
       const estimatedRevenue = mandi.price * quantity;
-      const estimatedTransport = approxDistance * vehicleRate;
+      
+      // Calculate fuel cost
+      const fuelConsumed = approxDistance / vehicleFuelEfficiency[vehicle];
+      const fuelCost = fuelConsumed * dieselPrice;
+      
+      // Keep existing transport cost as base rate + fuel cost
+      const estimatedTransport = (approxDistance * vehicleRate) + fuelCost;
       const estimatedProfit = estimatedRevenue - estimatedTransport - HANDLING_COST;
 
       estimatedMandis.push({
@@ -261,7 +353,13 @@ router.post('/calculate-profit', async (req, res) => {
           );
 
           const revenue = mandi.price * quantity;
-          const transportCost = routeData.distance * vehicleRate;
+          
+          // Calculate fuel cost with accurate distance
+          const fuelConsumed = routeData.distance / vehicleFuelEfficiency[vehicle];
+          const fuelCost = fuelConsumed * dieselPrice;
+          
+          // Keep existing transport cost as base rate + fuel cost
+          const transportCost = (routeData.distance * vehicleRate) + fuelCost;
           const netProfit = revenue - transportCost - HANDLING_COST;
 
           return {
@@ -272,10 +370,12 @@ router.post('/calculate-profit', async (req, res) => {
             profit: Math.round(netProfit),
             revenue: Math.round(revenue),
             transportCost: Math.round(transportCost),
+            fuelCost: Math.round(fuelCost),
             handlingCost: HANDLING_COST,
             price: mandi.price,
             coordinates: mandi.coordinates,
-            route: routeData.geometry
+            route: routeData.geometry,
+            dieselPrice: Math.round(dieselPrice * 100) / 100
           };
 
         } catch (err) {
