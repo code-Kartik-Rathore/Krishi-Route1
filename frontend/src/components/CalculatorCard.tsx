@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import {
   Sprout,
   Scale,
@@ -12,12 +13,12 @@ import {
 } from 'lucide-react';
 
 const CROPS = [
-  'Onion', 'Tomato', 'Potato', 'Mustard', 'Cotton', 'Castor Seed',
-  'Arhar(Tur/Red Gram)(Whole)', 'Brinjal', 'Mousambi(Sweet Lime)', 'Spinach',
-  'Sweet Potato', 'Apple', 'Banana', 'Bhindi(Ladies Finger)', 'Cabbage',
-  'Capsicum', 'Carrot', 'Cauliflower', 'Coconut Seed', 'Cucumbar(Kheera)',
-  'Garlic', 'Ginger(Green)', 'Green Chilli', 'Lemon', 'Maize', 'Paddy(Common)',
-  'Peas Wet', 'Pumpkin', 'Wheat',
+  'calculator.crops.onion', 'calculator.crops.tomato', 'calculator.crops.potato', 'calculator.crops.mustard', 'calculator.crops.cotton', 'calculator.crops.castorSeed',
+  'calculator.crops.arhar', 'calculator.crops.brinjal', 'calculator.crops.mousambi', 'calculator.crops.spinach',
+  'calculator.crops.sweetPotato', 'calculator.crops.apple', 'calculator.crops.banana', 'calculator.crops.bhindi', 'calculator.crops.cabbage',
+  'calculator.crops.capsicum', 'calculator.crops.carrot', 'calculator.crops.cauliflower', 'calculator.crops.coconut', 'calculator.crops.cucumbar',
+  'calculator.crops.garlic', 'calculator.crops.ginger', 'calculator.crops.greenChilli', 'calculator.crops.lemon', 'calculator.crops.maize', 'calculator.crops.paddy',
+  'calculator.crops.peas', 'calculator.crops.pumpkin', 'calculator.crops.wheat',
 ];
 
 interface FormData {
@@ -29,6 +30,7 @@ interface FormData {
 }
 
 export default function CalculatorCard() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [formData, setFormData] = useState<FormData>({
     crop: 'Onion',
@@ -66,9 +68,9 @@ export default function CalculatorCard() {
           }));
           setError('');
         },
-        () => setError('Unable to get your location. Please enter manually.')
+        () => setError(t('errors.locationError'))
       );
-    } else setError('Geolocation is not supported.');
+    } else setError(t('errors.locationError'));
   };
 
   const geocodeLocation = async (searchQuery: string) => {
@@ -124,14 +126,14 @@ export default function CalculatorCard() {
         <div className="relative p-6 sm:p-8 md:p-10">
           <div className="flex items-center gap-2 text-sm font-medium text-primary mb-6">
             <CheckCircle2 className="w-4 h-4 shrink-0" />
-            <span>Live prices from Government API (data.gov.in)</span>
+            <span>{t('calculator.title')}</span>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>
               <label className="flex items-center gap-2 text-sm font-semibold text-slate-700 mb-2">
                 <Sprout className="w-4 h-4 text-primary" />
-                Select crop
+                {t('calculator.cropType')}
               </label>
               <select
                 name="crop"
@@ -141,7 +143,7 @@ export default function CalculatorCard() {
               >
                 {CROPS.map((c) => (
                   <option key={c} value={c}>
-                    {c.replace(/\(.*\)/g, '').trim() || c}
+                    {t(c)}
                   </option>
                 ))}
               </select>
@@ -150,7 +152,7 @@ export default function CalculatorCard() {
             <div>
               <label className="flex items-center gap-2 text-sm font-semibold text-slate-700 mb-2">
                 <Scale className="w-4 h-4 text-primary" />
-                Quantity (quintals)
+                {t('calculator.quantity')}
               </label>
               <input
                 type="number"
@@ -166,7 +168,7 @@ export default function CalculatorCard() {
             <div>
               <label className="flex items-center gap-2 text-sm font-semibold text-slate-700 mb-2">
                 <Truck className="w-4 h-4 text-primary" />
-                Transport vehicle
+                {t('calculator.vehicleType')}
               </label>
               <select
                 name="vehicle"
@@ -183,14 +185,14 @@ export default function CalculatorCard() {
             <div>
               <label className="flex items-center gap-2 text-sm font-semibold text-slate-700 mb-2">
                 <MapPin className="w-4 h-4 text-primary" />
-                Your location
+                {t('calculator.location')}
               </label>
               <div className="flex flex-col sm:flex-row gap-2">
                 <input
                   type="text"
                   value={formData.locationSearch}
                   onChange={handleLocationSearchChange}
-                  placeholder="City, village, or address"
+                  placeholder={t('calculator.searchLocation')}
                   className="flex-1 px-4 py-3 rounded-xl border-2 border-slate-200 bg-white text-slate-800 placeholder:text-slate-400 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition"
                 />
                 <button
@@ -199,7 +201,7 @@ export default function CalculatorCard() {
                   className="px-4 py-3 rounded-xl border-2 border-slate-200 bg-slate-50 text-slate-700 font-medium hover:bg-slate-100 hover:border-slate-300 transition shrink-0 flex items-center justify-center gap-2"
                 >
                   <MapPin className="w-4 h-4" />
-                  Current location
+                  {t('calculator.useCurrentLocation')}
                 </button>
               </div>
             </div>
@@ -221,10 +223,10 @@ export default function CalculatorCard() {
               {isLoading ? (
                 <>
                   <Loader2 className="w-5 h-5 animate-spin" />
-                  Calculating best mandi…
+                  {t('common.loading')} {t('common.findBestMandi')}…
                 </>
               ) : (
-                'Find best mandi'
+                t('common.findBestMandi')
               )}
             </motion.button>
           </form>

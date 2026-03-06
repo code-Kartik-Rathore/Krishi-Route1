@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import {
   BarChart,
   Bar,
@@ -19,6 +20,7 @@ interface ProfitChartProps {
 }
 
 const ProfitChart: React.FC<ProfitChartProps> = ({ data }) => {
+  const { t } = useTranslation();
   const CustomTooltip = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
       return (
@@ -57,7 +59,7 @@ const ProfitChart: React.FC<ProfitChartProps> = ({ data }) => {
 
   return (
     <div style={styles.container}>
-      <h2 style={styles.title}>Profit Comparison</h2>
+      <h2 style={styles.title}>{t('dashboard.profitChart')}</h2>
       <ResponsiveContainer width="100%" height={400}>
         <BarChart
           data={sortedData}

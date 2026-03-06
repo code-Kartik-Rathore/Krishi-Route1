@@ -8,7 +8,20 @@ const fetch = require('node-fetch');
 // ----------------------------
 const SHORTLIST_LIMIT = 5;
 const HANDLING_COST = 500;
-const OSRM_TIMEOUT_MS = 2000;
+const OSRM_TIMEOUT_MS = 10000;
+
+// ----------------------------
+// PERISHABILITY RULES (SAFE DISTANCE IN KM)
+// ----------------------------
+const perishabilityRules = {
+  tomato: 100,
+  strawberry: 60,
+  grapes: 150,
+  onion: 500,
+  potato: 600,
+  wheat: 1000,
+  rice: 1000
+};
 
 // ----------------------------
 // IN-MEMORY CACHES
@@ -204,21 +217,23 @@ async function getDistance(fromLng, fromLat, toLng, toLat) {
     throw new Error('No route found');
   } catch (error) {
     clearTimeout(timeout);
+    console.error('OSRM Error:', error.message);
+    throw error;
+    // // If OSRM fails, fallback to haversine distance
+    // console.warn('OSRM failed, using haversine fallback:', error.message);
+    // const fallbackDistance = haversine(fromLat, fromLng, toLat, toLat);
+    // const result = {
+    //   distance: fallbackDistance,
+    //   geometry: null
+    // };
     
-    // If OSRM fails, fallback to haversine distance
-    console.warn('OSRM failed, using haversine fallback:', error.message);
-    const fallbackDistance = haversine(fromLat, fromLng, toLat, toLat);
-    const result = {
-      distance: fallbackDistance,
-      geometry: null
-    };
-    
-    distanceCache.set(key, result);
-    return result;
+    // distanceCache.set(key, result);
+    // return result;
   }
 }
 
 async function getMandiCoordinates(mandi, district, state) {
+  const apiKey = process.env.LOCATIONIQ_API_KEY;
   const cacheKey = `${mandi}-${district}-${state}`;
 
   if (mandiCoordinatesCache.has(cacheKey)) {
@@ -239,25 +254,29 @@ async function getMandiCoordinates(mandi, district, state) {
   }
 
   // Geocode only if needed
-  try {
-    const searchQuery = `${district}, ${state}, India`;
-    const geocodeUrl = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(searchQuery)}&limit=1`;
 
-    const response = await fetch(geocodeUrl);
+  const searchQuery = `${district}, ${state}, India`;
+
+  const url = `https://us1.locationiq.com/v1/search?key=${apiKey}&q=${encodeURIComponent(
+    searchQuery
+  )}&format=json&limit=1`;
+  
+  try {
+    const response = await fetch(url);
     const data = await response.json();
 
-    if (data && data.length > 0) {
-      const coordinates = {
+    if (data.length > 0) {
+      return {
         lat: parseFloat(data[0].lat),
         lng: parseFloat(data[0].lon)
       };
-
-      mandiCoordinatesCache.set(cacheKey, coordinates);
-      return coordinates;
     }
+
   } catch (error) {
     console.error("Geocoding error:", error.message);
   }
+
+  
 
   return null;
 }
@@ -299,6 +318,9 @@ router.post('/calculate-profit', async (req, res) => {
     
     // Get diesel price for the farmer's state
     const dieselPrice = await getDieselPrice(farmerLocation.state || 'delhi', 'state');
+
+    const cropKey = String(crop).toLowerCase();
+    const safeDistance = perishabilityRules[cropKey] || 500;
 
     for (const mandi of relevantMandis) {
       const coordinates = await getMandiCoordinates(
@@ -352,7 +374,18 @@ router.post('/calculate-profit', async (req, res) => {
             mandi.coordinates.lat
           );
 
+          const distance = Math.round(routeData.distance * 100) / 100;
+
+          let perishabilityRisk = "Low";
+          let perishabilityWarning = null;
+
+          if (routeData.distance > safeDistance) {
+            perishabilityRisk = "High";
+            perishabilityWarning = `${crop} may spoil beyond ${safeDistance} km`;
+          }
+
           const revenue = mandi.price * quantity;
+          const adjustedRevenue = routeData.distance > safeDistance ? revenue * 0.9 : revenue;
           
           // Calculate fuel cost with accurate distance
           const fuelConsumed = routeData.distance / vehicleFuelEfficiency[vehicle];
@@ -360,19 +393,21 @@ router.post('/calculate-profit', async (req, res) => {
           
           // Keep existing transport cost as base rate + fuel cost
           const transportCost = (routeData.distance * vehicleRate) + fuelCost;
-          const netProfit = revenue - transportCost - HANDLING_COST;
+          const netProfit = adjustedRevenue - transportCost - HANDLING_COST;
 
           return {
             mandi: mandi.mandi,
             state: mandi.state,
             district: mandi.district,
-            distance: Math.round(routeData.distance * 100) / 100,
+            distance,
             profit: Math.round(netProfit),
-            revenue: Math.round(revenue),
+            revenue: Math.round(adjustedRevenue),
             transportCost: Math.round(transportCost),
             fuelCost: Math.round(fuelCost),
             handlingCost: HANDLING_COST,
             price: mandi.price,
+            perishabilityRisk,
+            perishabilityWarning,
             coordinates: mandi.coordinates,
             route: routeData.geometry,
             dieselPrice: Math.round(dieselPrice * 100) / 100

@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 interface ProfitCardProps {
   mandi: string;
@@ -12,6 +13,8 @@ interface ProfitCardProps {
   handlingCost: number;
   dieselPrice: number;
   price: number;
+  perishabilityRisk?: "Low" | "High";
+  perishabilityWarning?: string | null;
   minPrice?: number;
   maxPrice?: number;
   variety?: string;
@@ -32,6 +35,8 @@ const ProfitCard: React.FC<ProfitCardProps> = ({
   handlingCost,
   dieselPrice,
   price,
+  perishabilityRisk,
+  perishabilityWarning,
   minPrice,
   maxPrice,
   variety,
@@ -39,6 +44,7 @@ const ProfitCard: React.FC<ProfitCardProps> = ({
   arrivalDate,
   isBest
 }) => {
+  const { t } = useTranslation();
   return (
     <div style={isBest ? styles.cardBest : styles.card}>
       <div style={styles.header}>
@@ -50,11 +56,32 @@ const ProfitCard: React.FC<ProfitCardProps> = ({
             </p>
           )}
         </div>
-        {isBest && <span style={styles.bestBadge}>BEST</span>}
+        <div style={styles.badges}>
+          {perishabilityRisk && (
+            <span
+              style={{
+                ...styles.riskBadge,
+                background: perishabilityRisk === 'High' ? '#fee2e2' : '#dcfce7',
+                color: perishabilityRisk === 'High' ? '#b91c1c' : '#166534',
+                borderColor: perishabilityRisk === 'High' ? '#fecaca' : '#bbf7d0'
+              }}
+              title={perishabilityWarning || undefined}
+            >
+              {perishabilityRisk === 'High' ? 'HIGH RISK' : 'LOW RISK'}
+            </span>
+          )}
+          {isBest && <span style={styles.bestBadge}>BEST</span>}
+        </div>
       </div>
+
+      {perishabilityWarning && (
+        <div style={styles.warningBox}>
+          <span style={styles.warningText}>⚠️ {perishabilityWarning}</span>
+        </div>
+      )}
       
       <div style={isBest ? { ...styles.profitSection, background: 'rgba(255, 255, 255, 0.1)' } : styles.profitSection}>
-        <div style={styles.profitLabel}>Net Profit</div>
+        <div style={styles.profitLabel}>{t('dashboard.profitDetails.netProfit')}</div>
         <div style={isBest ? styles.profitValueBest : styles.profitValue}>
           ₹{profit.toLocaleString('en-IN')}
         </div>
@@ -62,36 +89,36 @@ const ProfitCard: React.FC<ProfitCardProps> = ({
 
       <div style={styles.detailsSection}>
         <div style={styles.detailRow}>
-          <span style={styles.label}>Revenue:</span>
+          <span style={styles.label}>{t('dashboard.profitDetails.revenue')}:</span>
           <span style={styles.value}>₹{revenue.toLocaleString('en-IN')}</span>
         </div>
         <div style={styles.detailRow}>
-          <span style={styles.label}>Transport Cost:</span>
+          <span style={styles.label}>{t('dashboard.profitDetails.transportCost')}:</span>
           <span style={styles.value}>₹{transportCost.toLocaleString('en-IN')}</span>
         </div>
         <div style={styles.detailRow}>
-          <span style={styles.label}>Fuel Cost:</span>
+          <span style={styles.label}>{t('dashboard.profitDetails.fuelCost')}:</span>
           <span style={styles.value}>₹{fuelCost.toLocaleString('en-IN')}</span>
         </div>
         <div style={styles.detailRow}>
-          <span style={styles.label}>Diesel Price:</span>
+          <span style={styles.label}>{t('dashboard.profitDetails.dieselPrice')}:</span>
           <span style={styles.value}>₹{dieselPrice}/liter</span>
         </div>
         <div style={styles.detailRow}>
-          <span style={styles.label}>Handling Cost:</span>
+          <span style={styles.label}>{t('dashboard.profitDetails.handlingCost')}:</span>
           <span style={styles.value}>₹{handlingCost.toLocaleString('en-IN')}</span>
         </div>
         <div style={styles.detailRow}>
-          <span style={styles.label}>Distance:</span>
+          <span style={styles.label}>{t('dashboard.profitDetails.distance')}:</span>
           <span style={styles.value}>{distance} km</span>
         </div>
         <div style={styles.detailRow}>
-          <span style={styles.label}>Price/Quintal:</span>
+          <span style={styles.label}>{t('dashboard.profitDetails.price')}/Quintal:</span>
           <span style={styles.value}>₹{price.toLocaleString('en-IN')}</span>
         </div>
         {(minPrice || maxPrice) && (
           <div style={styles.detailRow}>
-            <span style={styles.label}>Price Range:</span>
+            <span style={styles.label}>{t('dashboard.profitDetails.minPrice')} - {t('dashboard.profitDetails.maxPrice')}:</span>
             <span style={styles.value}>
               ₹{minPrice?.toLocaleString('en-IN')} - ₹{maxPrice?.toLocaleString('en-IN')}
             </span>
@@ -99,19 +126,19 @@ const ProfitCard: React.FC<ProfitCardProps> = ({
         )}
         {variety && (
           <div style={styles.detailRow}>
-            <span style={styles.label}>Variety:</span>
+            <span style={styles.label}>{t('dashboard.profitDetails.variety')}:</span>
             <span style={styles.value}>{variety}</span>
           </div>
         )}
         {grade && (
           <div style={styles.detailRow}>
-            <span style={styles.label}>Grade:</span>
+            <span style={styles.label}>{t('dashboard.profitDetails.grade')}:</span>
             <span style={styles.value}>{grade}</span>
           </div>
         )}
         {arrivalDate && (
           <div style={styles.detailRow}>
-            <span style={styles.label}>Arrival Date:</span>
+            <span style={styles.label}>{t('dashboard.profitDetails.arrivalDate')}:</span>
             <span style={styles.value}>{arrivalDate}</span>
           </div>
         )}
@@ -144,6 +171,11 @@ const styles = {
     alignItems: 'center',
     marginBottom: '15px',
   },
+  badges: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '8px',
+  },
   mandiName: {
     fontSize: '1.3rem',
     fontWeight: 'bold',
@@ -162,6 +194,28 @@ const styles = {
     borderRadius: '20px',
     fontSize: '0.75rem',
     fontWeight: 'bold',
+  },
+  riskBadge: {
+    padding: '4px 10px',
+    borderRadius: '999px',
+    fontSize: '0.7rem',
+    fontWeight: '800',
+    border: '1px solid',
+    letterSpacing: '0.02em',
+    whiteSpace: 'nowrap' as const,
+  },
+  warningBox: {
+    marginBottom: '12px',
+    padding: '10px 12px',
+    borderRadius: '10px',
+    background: 'rgba(245, 158, 11, 0.15)',
+    border: '1px solid rgba(245, 158, 11, 0.3)',
+  },
+  warningText: {
+    fontSize: '0.85rem',
+    fontWeight: 700,
+    color: 'inherit',
+    opacity: 0.95,
   },
   profitSection: {
     textAlign: 'center' as const,

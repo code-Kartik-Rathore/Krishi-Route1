@@ -1,0 +1,269 @@
+{
+  "common": {
+    "loading": "लोड हो रहा है...",
+    "error": "त्रुटि",
+    "success": "सफलता",
+    "submit": "जमा करें",
+    "cancel": "रद्द करें",
+    "reset": "रीसेट करें",
+    "calculate": "गणना करें",
+    "back": "पीछे",
+    "next": "अगला",
+    "language": "भाषा",
+    "liveApi": "लाइव API",
+    "findBestMandi": "सबसे अच्छा मंडी खोजें",
+    "tryItNow": "अभी आज़माएं",
+    "howItWorks": "यह कैसे काम करता है",
+    "whyKrishiRoute": "कृषि-रूट क्यों?",
+    "contact": "संपर्क",
+    "findMandi": "मंडी खोजें",
+    "beforeVsAfter": "पहले बाद में",
+    "perTrip": "/ यात्रा",
+    "livePrice": "लाइव कीमत",
+    "governmentApi": "सरकारी API",
+    "realtimePrices": "रीयल-टाइम कीमतें",
+    "farmerCentric": "किसान-केंद्रित",
+    "dataGovIn": "data.gov.in",
+    "updatedRegularly": "नियमित रूप से अपडेट किया गया",
+    "builtForYou": "आपके लिए बनाया गया"
+  },
+  "navigation": {
+    "home": "होम",
+    "dashboard": "डैशबोर्ड",
+    "calculator": "लाभ कैलकुलेटर",
+    "mapView": "मैप दृश्य",
+    "landing": "लैंडिंग"
+  },
+  "landing": {
+    "title": "कृषि रूट",
+    "subtitle": "कृषि रूट अनुकूलन प्लेटफॉर्म",
+    "description": "बुद्धिमान रूट योजना और लाभ गणना के साथ अपनी कृषि आपूर्ति श्रृंखला का अनुकूलन करें",
+    "heroTitle": "अपनी फसलों के लिए सबसे लाभदायक मंडी खोजें",
+    "heroDescription": "लाइव सरकारी कीमतें + परिवहन लागत = अधिकतम किसान लाभ।",
+    "getStarted": "शुरू करें",
+    "highlights": {
+      "liveGovPrices": "लाइव सरकारी मंडी कीमतें",
+      "transportAwareProfit": "परिवहन-जागरूक लाभ गणना",
+      "smartMandiRecommendations": "स्मार्ट मंडी अनुशंसाएं"
+    },
+    "features": {
+      "title": "विशेषताएं",
+      "routeOptimization": "रूट अनुकूलन",
+      "routeOptimizationDesc": "बाजारों तक सबसे कुशल मार्ग खोजें",
+      "profitCalculation": "लाभ गणना",
+      "profitCalculationDesc": "रीयल-टाइम डेटा के साथ सटीक लाभ की गणना करें",
+      "marketData": "बाजार डेटा",
+      "marketDataDesc": "व्यापक मंडी बाजार जानकारी तक पहुंचें"
+    },
+    "calculatorSection": {
+      "title": "अभी आज़माएं",
+      "description": "नीचे अपना विवरण दर्ज करें। हम आपकी सर्वोत्तम मंडी खोजने के लिए लाइव सरकारी डेटा का उपयोग करेंगे।"
+    },
+    "howItWorks": {
+      "title": "यह कैसे काम करता है",
+      "description": "आपके खेत से सर्वोत्तम मंडी तक के चार सरल चरण।",
+      "steps": {
+        "selectCrop": {
+          "title": "फसल और मात्रा चुनें",
+          "description": "अपनी फसल चुनें और आप कितना बेचना चाहते हैं (क्विंटल में)।"
+        },
+        "chooseTransport": {
+          "title": "परिवहन और स्थान चुनें",
+          "description": "सटीक दूरी के लिए अपना वाहन चुनें और अपना स्थान दर्ज करें।"
+        },
+        "fetchPrices": {
+          "title": "लाइव मंडी कीमतें प्राप्त करें",
+          "description": "हम मंडियों में रीयल-टाइम कीमतें प्राप्त करने के लिए आधिकारिक सरकारी API का उपयोग करते हैं।"
+        },
+        "getBestMandi": {
+          "title": "अधिकतम लाभ के साथ सर्वोत्तम मंडी प्राप्त करें",
+          "description": "हम उस मंडी की अनुशंसा करते हैं जो आपको उच्चतम शुद्ध लाभ देती है।"
+        }
+      }
+    },
+    "whyKrishiRoute": {
+      "title": "कृषि-रूट क्यों?",
+      "description": "भारतीय किसानों के लिए बनाया गया, सरकारी डेटा द्वारा संचालित।",
+      "benefits": {
+        "higherProfit": {
+          "title": "प्रति यात्रा अधिक लाभ",
+          "desc": "जहां आप अधिक कमाते हैं वहां बेचें, सिर्फ नजदीकी नहीं।"
+        },
+        "verifiedData": {
+          "title": "सत्यापित सरकारी डेटा",
+          "desc": "data.gov.in से कीमतें — पारदर्शी और विश्वसनीय।"
+        },
+        "transportAware": {
+          "title": "परिवहन-जागरूक मूल्य निर्धारण",
+          "desc": "हर अनुशंसा में ईंधन और वाहन लागत शामिल है।"
+        },
+        "savesTime": {
+          "title": "समय और ईंधन बचाता है",
+          "desc": "एक निर्णय, एक मार्ग — कोई अनुमान नहीं।"
+        },
+        "locationBased": {
+          "title": "स्थान-आधारित परिणाम",
+          "desc": "आपके वास्तविक स्थान के आधार पर अनुशंसाएं।"
+        },
+        "farmerFirst": {
+          "title": "किसान-पहले डिजाइन",
+          "desc": "भारतीय किसानों के लिए बनाया गया, आपकी भाषा और संदर्भ में।"
+        }
+      }
+    },
+    "mapSection": {
+      "title": "नजदीकी मंडी नहीं — सबसे स्मार्ट मंडी",
+      "description": "हम आपको मार्ग दिखाते हैं और वास्तविक परिवहन लागतों की तुलना करते हैं ताकि आप वह मंडी चुन सकें जो आपको उच्चतम शुद्ध लाभ देती है, सिर्फ नजदीकी नहीं।",
+      "features": {
+        "indiaCoverage": "भारव्यापी मंडी कवरेज",
+        "routeAware": "रूट-जागरूक दूरी और लागत",
+        "liveComparison": "लाइव कीमत तुलना"
+      },
+      "routeCalculation": "रूट-जागरूक लाभ गणना",
+      "distanceCost": "दूरी + वाहन लागत = शुद्ध लाभ"
+    },
+    "trust": {
+      "description": "कृषि-रूट केवल आधिकारिक सरकारी मंडी मूल्य डेटा का उपयोग करता है। कोई अनुमान नहीं — बस पारदर्शी, सत्यापन योग्य संख्याएं जो आपको सर्वोत्तम बिक्री निर्णय लेने में मदद करती हैं।"
+    },
+    "testimonial": {
+      "quote": "पहले मैं नजदीकी मंडी में बेचता था। अब मैं सबसे लाभदायक मंडी में बेचता हूं।",
+      "author": "किसान, उत्तर भारत",
+      "uses": "प्याज और आलू के लिए कृषि-रूट का उपयोग करते हैं"
+    },
+    "finalCta": {
+      "title": "आपकी कड़ी मेहनत सर्वोत्तम मूल्य के हकदार है।",
+      "description": "लाइव सरकारी डेटा के साथ पहले से ही बेहतर मंडी विकल्प बना रहे किसानों में शामिल हों।",
+      "button": "मेरी सर्वोत्तम मंडी खोजें"
+    },
+    "footer": {
+      "tagline": "स्मार्ट मंडी खोज और लाभ अनुकूलन",
+      "builtFor": "भारतीय किसानों के लिए बनाया गया 🇮🇳"
+    }
+  },
+  "calculator": {
+    "title": "लाभ कैलकुलेटर",
+    "cropType": "फसल का प्रकार",
+    "quantity": "मात्रा (क्विंटल)",
+    "sourceMandi": "स्रोत मंडी",
+    "destinationMandi": "गंतव्य मंडी",
+    "transportCost": "प्रति किमी परिवहन लागत",
+    "calculateProfit": "लाभ की गणना करें",
+    "vehicleType": "वाहन प्रकार",
+    "location": "आपका स्थान",
+    "searchLocation": "अपना स्थान खोजें",
+    "useCurrentLocation": "वर्तमान स्थान का उपयोग करें",
+    "enterManually": "दस्ती दर्ज करें",
+    "results": {
+      "title": "परिणाम",
+      "sellingPrice": "विक्रय मूल्य",
+      "transportCost": "परिवहन लागत",
+      "handlingCost": "हैंडलिंग लागत",
+      "handingCost": "हैंडलिंग लागत",
+      "totalCost": "कुल लागत",
+      "netProfit": "शुद्ध लाभ",
+      "recommendedRoute": "अनुशंसित मार्ग",
+      "bestMandi": "अधिकतम लाभ के लिए सर्वोत्तम मंडी"
+    },
+    "crops": {
+      "onion": "प्याज",
+      "tomato": "टमाटर",
+      "potato": "आलू",
+      "mustard": "सरसों",
+      "cotton": "कपास",
+      "castorSeed": "अरंडी का बीज",
+      "arhar": "अरहर(तुर/लाल चना)(साबुत)",
+      "brinjal": "बैंगन",
+      "mousambi": "मौसम्बी(मीठा नींबू)",
+      "spinach": "पालक",
+      "sweetPotato": "शकरकंद",
+      "apple": "सेब",
+      "banana": "केला",
+      "bhindi": "भिंडी(लेडीज फिंगर)",
+      "cabbage": "पत्तागोभी",
+      "capsicum": "कैप्सिकम",
+      "carrot": "गाजर",
+      "cauliflower": "फूलगोभी",
+      "coconut": "नारियल का बीज",
+      "cucumbar": "ककड़ी(खीरा)",
+      "garlic": "लहसुन",
+      "ginger": "अदरक(हरा)",
+      "greenChilli": "हरी मिर्च",
+      "lemon": "नींबू",
+      "maize": "मक्का",
+      "paddy": "धान(सामान्य)",
+      "peas": "मटर गीला",
+      "pumpkin": "कद्दू",
+      "wheat": "गेहूं"
+    },
+    "vehicles": {
+      "tataAce": "टाटा एस",
+      "tata407": "टाटा 407",
+      "mahindraPickup": "महिंद्रा पिकअप",
+      "tractorTrolley": "ट्रैक्टर ट्रॉली",
+      "smallTruck": "छोटा ट्रक",
+      "largeTruck": "बड़ा ट्रक"
+    }
+  },
+  "dashboard": {
+    "title": "डैशबोर्ड",
+    "overview": "अवलोकन",
+    "totalProfit": "कुल लाभ",
+    "activeRoutes": "सक्रिय मार्ग",
+    "marketsCovered": "शामिल बाजार",
+    "recentCalculations": "हाल की गणनाएं",
+    "profitChart": "लाभ प्रवृत्तियां",
+    "marketComparison": "बाजार तुलना",
+    "results": {
+      "title": "लाभ विश्लेषण परिणाम",
+      "crop": "फसल",
+      "quantity": "मात्रा",
+      "vehicle": "वाहन",
+      "bestMandi": "सर्वोत्तम मंडी",
+      "totalMandis": "कुल मंडी पाई गई",
+      "dataSource": "डेटा स्रोत"
+    },
+    "profitDetails": {
+      "revenue": "राजस्व",
+      "transportCost": "परिवहन लागत",
+      "fuelCost": "ईंधन लागत",
+      "handlingCost": "हैंडलिंग लागत",
+      "handingCost": "हैंडलिंग लागत",
+      "totalCost": "कुल लागत",
+      "netProfit": "शुद्ध लाभ",
+      "distance": "दूरी",
+      "dieselPrice": "डीजल कीमत",
+      "price": "कीमत",
+      "minPrice": "न्यूनतम कीमत",
+      "maxPrice": "अधिकतम कीमत",
+      "variety": "किस्म",
+      "grade": "ग्रेड",
+      "arrivalDate": "आगमन तिथि",
+      "perishabilityRisk": "नष्ट होने का जोखिम",
+      "perishabilityWarning": "नष्ट होने की चेतावनी"
+    }
+  },
+  "mapView": {
+    "title": "मैप दृश्य",
+    "searchLocation": "स्थान खोजें",
+    "currentLocation": "वर्तमान स्थान",
+    "nearbyMarkets": "निकटवर्ती बाजार",
+    "routeInfo": "मार्ग जानकारी",
+    "distance": "दूरी",
+    "estimatedTime": "अनुमानित समय",
+    "showRoutes": "मार्ग दिखाएं",
+    "yourLocation": "आपका स्थान",
+    "recommendedMandi": "अनुशंसित मंडी",
+    "alternativeMarkets": "वैकल्पिक बाजार",
+    "routeDetails": "मार्ग विवरण",
+    "profitDetails": "लाभ विवरण"
+  },
+  "errors": {
+    "networkError": "नेटवर्क त्रुटि। कृपया अपना कनेक्शन जांचें।",
+    "dataLoadError": "डेटा लोड करने में विफल। कृपया फिर से कोशिश करें।",
+    "calculationError": "गणना में त्रुटि। कृपया अपने इनपुट जांचें।",
+    "locationError": "आपका स्थान प्राप्त करने में असमर्थ।",
+    "noResultsFound": "कोई परिणाम नहीं मिला। कृपया अलग मापदंड आज़माएं।",
+    "invalidInput": "अमान्य इनपुट। कृपया अपनी प्रविष्टियां जांचें।",
+    "serverError": "सर्वर त्रुटि। कृपया बाद में फिर से कोशिश करें।"
+  }
+}

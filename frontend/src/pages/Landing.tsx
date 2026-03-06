@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import {
   Check,
   ArrowRight,
@@ -18,44 +19,45 @@ import {
 import CalculatorCard from '../components/CalculatorCard';
 
 const HIGHLIGHTS = [
-  'Live government mandi prices',
-  'Transport-aware profit calculation',
-  'Smart mandi recommendations',
+  'landing.highlights.liveGovPrices',
+  'landing.highlights.transportAwareProfit',
+  'landing.highlights.smartMandiRecommendations',
 ];
 
 const STEPS = [
   {
     icon: Sprout,
-    title: 'Select crop & quantity',
-    description: 'Choose your crop and how much you want to sell (in quintals).',
+    title: 'landing.howItWorks.steps.selectCrop.title',
+    description: 'landing.howItWorks.steps.selectCrop.description',
   },
   {
     icon: Truck,
-    title: 'Choose transport & location',
-    description: 'Pick your vehicle and enter your location for accurate distance.',
+    title: 'landing.howItWorks.steps.chooseTransport.title',
+    description: 'landing.howItWorks.steps.chooseTransport.description',
   },
   {
     icon: BarChart3,
-    title: 'Fetch live mandi prices',
-    description: 'We use official government API to get real-time prices across mandis.',
+    title: 'landing.howItWorks.steps.fetchPrices.title',
+    description: 'landing.howItWorks.steps.fetchPrices.description',
   },
   {
     icon: Target,
-    title: 'Get best mandi with max profit',
-    description: 'We recommend the mandi that gives you the highest net profit.',
+    title: 'landing.howItWorks.steps.getBestMandi.title',
+    description: 'landing.howItWorks.steps.getBestMandi.description',
   },
 ];
 
 const BENEFITS = [
-  { icon: IndianRupee, title: 'Higher profit per trip', desc: 'Sell where you earn more, not just where it\'s nearest.' },
-  { icon: ShieldCheck, title: 'Verified government data', desc: 'Prices from data.gov.in — transparent and trustworthy.' },
-  { icon: Truck, title: 'Transport-aware pricing', desc: 'Fuel and vehicle cost included in every recommendation.' },
-  { icon: Clock, title: 'Saves time & fuel', desc: 'One decision, one route — no guesswork.' },
-  { icon: MapPinned, title: 'Location-based results', desc: 'Recommendations based on your actual location.' },
-  { icon: Heart, title: 'Farmer-first design', desc: 'Built for Indian farmers, in your language and context.' },
+  { icon: IndianRupee, title: 'landing.whyKrishiRoute.benefits.higherProfit.title', desc: 'landing.whyKrishiRoute.benefits.higherProfit.desc' },
+  { icon: ShieldCheck, title: 'landing.whyKrishiRoute.benefits.verifiedData.title', desc: 'landing.whyKrishiRoute.benefits.verifiedData.desc' },
+  { icon: Truck, title: 'landing.whyKrishiRoute.benefits.transportAware.title', desc: 'landing.whyKrishiRoute.benefits.transportAware.desc' },
+  { icon: Clock, title: 'landing.whyKrishiRoute.benefits.savesTime.title', desc: 'landing.whyKrishiRoute.benefits.savesTime.desc' },
+  { icon: MapPinned, title: 'landing.whyKrishiRoute.benefits.locationBased.title', desc: 'landing.whyKrishiRoute.benefits.locationBased.desc' },
+  { icon: Heart, title: 'landing.whyKrishiRoute.benefits.farmerFirst.title', desc: 'landing.whyKrishiRoute.benefits.farmerFirst.desc' },
 ];
 
 export default function Landing() {
+  const { t } = useTranslation();
   return (
     <div className="min-h-screen bg-[hsl(var(--krishi-neutral-bg))]">
       {/* ─────────────────────────────────────────────────────────────────────
@@ -74,13 +76,13 @@ export default function Landing() {
               <span className="w-1.5 h-1.5 rounded-full bg-green-500" />
               Live API
             </span>
-            <a
-              href="#calculator"
-              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-primary text-white font-semibold text-sm hover:bg-primary-hover transition"
-            >
-              Find best mandi
-              <ChevronRight className="w-4 h-4" />
-            </a>
+                <a
+                  href="#calculator"
+                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-primary text-white font-semibold text-sm hover:bg-primary-hover transition"
+                >
+                  {t('common.findBestMandi')}
+                  <ChevronRight className="w-4 h-4" />
+                </a>
           </div>
         </div>
       </nav>
@@ -100,7 +102,7 @@ export default function Landing() {
                 transition={{ duration: 0.5 }}
                 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 leading-tight"
               >
-                Find the most profitable mandi for your crops
+                {t('landing.title')}
               </motion.h1>
               <motion.p
                 initial={{ opacity: 0, y: 16 }}
@@ -108,7 +110,7 @@ export default function Landing() {
                 transition={{ duration: 0.5, delay: 0.1 }}
                 className="mt-6 text-lg sm:text-xl text-slate-600 max-w-xl"
               >
-                Live government prices + transport cost = maximum farmer profit.
+                {t('landing.description')}
               </motion.p>
               <motion.ul
                 initial={{ opacity: 0 }}
@@ -121,7 +123,7 @@ export default function Landing() {
                     <span className="flex items-center justify-center w-6 h-6 rounded-full bg-primary text-white shrink-0">
                       <Check className="w-3.5 h-3.5" />
                     </span>
-                    {item}
+                    {t(item)}
                   </li>
                 ))}
               </motion.ul>
@@ -135,14 +137,14 @@ export default function Landing() {
                   href="#calculator"
                   className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-primary text-white font-semibold shadow-lg shadow-primary/30 hover:bg-primary-hover hover:shadow-primary/40 transition"
                 >
-                  Find best mandi
+                  {t('common.findBestMandi')}
                   <ArrowRight className="w-4 h-4" />
                 </a>
                 <a
                   href="#how-it-works"
                   className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl border-2 border-slate-300 text-slate-700 font-semibold hover:bg-slate-50 transition"
                 >
-                  See how it works
+                  {t('common.howItWorks')}
                 </a>
               </motion.div>
             </div>
@@ -191,10 +193,10 @@ export default function Landing() {
             className="text-center mb-12"
           >
             <h2 className="font-heading text-3xl sm:text-4xl font-bold text-white">
-              Try it now
+              {t('landing.calculatorSection.title')}
             </h2>
             <p className="mt-3 text-slate-100 max-w-xl mx-auto">
-              Enter your details below. We’ll use live government data to find your best mandi.
+              {t('landing.calculatorSection.description')}
             </p>
           </motion.div>
           <CalculatorCard />
@@ -213,10 +215,10 @@ export default function Landing() {
             className="text-center mb-14"
           >
             <h2 className="font-heading text-3xl sm:text-4xl font-bold text-slate-900">
-              How it works
+              {t('landing.howItWorks.title')}
             </h2>
             <p className="mt-3 text-slate-600 max-w-2xl mx-auto">
-              Four simple steps from your field to the best mandi.
+              {t('landing.howItWorks.description')}
             </p>
           </motion.div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -235,8 +237,8 @@ export default function Landing() {
                 {i < STEPS.length - 1 && (
                   <div className="hidden lg:block absolute top-7 left-[calc(50%+2rem)] w-[calc(100%-4rem)] h-0.5 bg-gradient-to-r from-primary-muted to-transparent" />
                 )}
-                <h3 className="font-heading font-semibold text-slate-900">{step.title}</h3>
-                <p className="mt-2 text-sm text-slate-600">{step.description}</p>
+                <h3 className="font-heading font-semibold text-slate-900">{t(step.title)}</h3>
+                <p className="mt-2 text-sm text-slate-600">{t(step.description)}</p>
               </motion.div>
             ))}
           </div>
@@ -254,10 +256,10 @@ export default function Landing() {
           className="text-center mb-14"
         >
           <h2 className="font-heading text-3xl sm:text-4xl font-bold text-slate-900">
-            Why Krishi-Route?
+            {t('landing.whyKrishiRoute.title')}
           </h2>
           <p className="mt-3 text-slate-600 max-w-2xl mx-auto">
-            Built for Indian farmers, powered by government data.
+            {t('landing.whyKrishiRoute.description')}
           </p>
         </motion.div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -274,8 +276,8 @@ export default function Landing() {
               <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-primary-light text-primary mb-4">
                 <benefit.icon className="w-6 h-6" />
               </div>
-              <h3 className="font-heading font-semibold text-slate-900">{benefit.title}</h3>
-              <p className="mt-2 text-slate-600 text-sm">{benefit.desc}</p>
+              <h3 className="font-heading font-semibold text-slate-900">{t(benefit.title)}</h3>
+              <p className="mt-2 text-slate-600 text-sm">{t(benefit.desc)}</p>
             </motion.div>
           ))}
         </div>

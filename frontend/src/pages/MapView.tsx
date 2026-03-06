@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { MapContainer, TileLayer, Marker, Popup, Polyline } from 'react-leaflet';
 import type { LatLngExpression } from 'leaflet';
 import L from 'leaflet';
@@ -22,6 +23,8 @@ interface MapViewState {
     district?: string;
     distance: number;
     profit: number;
+    perishabilityRisk?: "Low" | "High";
+    perishabilityWarning?: string | null;
     coordinates: { lat: number; lng: number };
   }>;
   route: any;
@@ -276,6 +279,16 @@ const MapView: React.FC = () => {
                       <p style={styles.popupText}>
                         Expected Profit: ₹{bestMandiResult.profit.toLocaleString('en-IN')}
                       </p>
+                      {bestMandiResult.perishabilityRisk && (
+                        <p style={{ ...styles.popupText, fontWeight: 700 }}>
+                          Spoilage Risk: {bestMandiResult.perishabilityRisk}
+                        </p>
+                      )}
+                      {bestMandiResult.perishabilityWarning && (
+                        <p style={{ ...styles.popupText, fontWeight: 700, color: '#b45309' }}>
+                          ⚠️ {bestMandiResult.perishabilityWarning}
+                        </p>
+                      )}
                     </div>
                   </Popup>
                 </Marker>
@@ -313,6 +326,18 @@ const MapView: React.FC = () => {
               <span style={styles.routeLabel}>Net Profit:</span>
               <span style={styles.routeValue}>₹{bestMandiResult.profit.toLocaleString('en-IN')}</span>
             </div>
+            {bestMandiResult.perishabilityRisk && (
+              <div style={styles.routeItem}>
+                <span style={styles.routeLabel}>Spoilage Risk:</span>
+                <span style={styles.routeValue}>{bestMandiResult.perishabilityRisk}</span>
+              </div>
+            )}
+          </div>
+        )}
+        {bestMandiResult?.perishabilityWarning && (
+          <div style={{ marginTop: '14px', padding: '12px', borderRadius: '10px', background: '#fffbeb', border: '1px solid #fde68a' }}>
+            <div style={{ fontWeight: 800, color: '#92400e' }}>⚠️ Perishability Warning</div>
+            <div style={{ marginTop: '6px', color: '#92400e', fontWeight: 600 }}>{bestMandiResult.perishabilityWarning}</div>
           </div>
         )}
       </div>

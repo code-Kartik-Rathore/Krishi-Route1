@@ -1,5 +1,6 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import ProfitCard from '../components/ProfitCard';
 import ProfitChart from '../components/ProfitChart';
 
@@ -17,6 +18,8 @@ interface DashboardState {
     handlingCost: number;
     dieselPrice: number;
     price: number;
+    perishabilityRisk?: "Low" | "High";
+    perishabilityWarning?: string | null;
     minPrice?: number;
     maxPrice?: number;
     variety?: string;
@@ -34,6 +37,7 @@ interface DashboardState {
 }
 
 const Dashboard: React.FC = () => {
+  const { t } = useTranslation();
   const location = useLocation();
   const navigate = useNavigate();
   const state = location.state as DashboardState;
@@ -64,18 +68,18 @@ const Dashboard: React.FC = () => {
   return (
     <div style={styles.container}>
       <div style={styles.header}>
-        <h1 style={styles.title}>📊 Profit Analysis Results</h1>
+        <h1 style={styles.title}>{t('dashboard.results.title')}</h1>
         <button style={styles.newSearchButton} onClick={handleNewSearch}>
-          New Search
+          {t('common.back')}
         </button>
       </div>
 
       <div style={styles.summarySection}>
-        <h2 style={styles.summaryTitle}>Input Summary</h2>
+        <h2 style={styles.summaryTitle}>{t('dashboard.results.title')}</h2>
         <div style={styles.summaryGrid}>
-          <span style={styles.summaryItem}>Crop: {crop}</span>
-          <span style={styles.summaryItem}>Quantity: {quantity} quintals</span>
-          <span style={styles.summaryItem}>Vehicle: {vehicle}</span>
+          <span style={styles.summaryItem}>{t('dashboard.results.crop')}: {crop}</span>
+          <span style={styles.summaryItem}>{t('dashboard.results.quantity')}: {quantity} quintals</span>
+          <span style={styles.summaryItem}>{t('dashboard.results.vehicle')}: {vehicle}</span>
         </div>
       </div>
 
@@ -94,7 +98,29 @@ const Dashboard: React.FC = () => {
             <span style={styles.detailItem}>📍 {bestMandiResult.district}, {bestMandiResult.state}</span>
             <span style={styles.detailItem}>📏 {bestMandiResult.distance} km away</span>
             <span style={styles.detailItem}>💰 ₹{bestMandiResult.price}/quintal</span>
+            {bestMandiResult.perishabilityRisk && (
+              <span
+                style={{
+                  ...styles.detailItem,
+                  background:
+                    bestMandiResult.perishabilityRisk === 'High'
+                      ? 'rgba(220, 38, 38, 0.25)'
+                      : 'rgba(16, 185, 129, 0.2)',
+                  border:
+                    bestMandiResult.perishabilityRisk === 'High'
+                      ? '1px solid rgba(220, 38, 38, 0.35)'
+                      : '1px solid rgba(16, 185, 129, 0.3)',
+                }}
+              >
+                🥬 Spoilage Risk: {bestMandiResult.perishabilityRisk}
+              </span>
+            )}
           </div>
+        )}
+        {bestMandiResult?.perishabilityWarning && (
+          <p style={{ margin: '12px 0 0 0', fontWeight: 700, color: 'rgba(255,255,255,0.95)' }}>
+            ⚠️ {bestMandiResult.perishabilityWarning}
+          </p>
         )}
       </div>
 
@@ -113,6 +139,8 @@ const Dashboard: React.FC = () => {
             handlingCost={result.handlingCost}
             dieselPrice={result.dieselPrice}
             price={result.price}
+            perishabilityRisk={result.perishabilityRisk}
+            perishabilityWarning={result.perishabilityWarning}
             minPrice={result.minPrice}
             maxPrice={result.maxPrice}
             variety={result.variety}

@@ -1,0 +1,269 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "reset": "Reset",
+    "calculate": "Calculate",
+    "back": "Back",
+    "next": "Next",
+    "language": "Language",
+    "liveApi": "Live API",
+    "findBestMandi": "Find best mandi",
+    "tryItNow": "Try it now",
+    "howItWorks": "How it works",
+    "whyKrishiRoute": "Why Krishi-Route?",
+    "contact": "Contact",
+    "findMandi": "Find mandi",
+    "beforeVsAfter": "Before vs after",
+    "perTrip": "/ trip",
+    "livePrice": "Live price",
+    "governmentApi": "Government API",
+    "realtimePrices": "Real-time prices",
+    "farmerCentric": "Farmer-centric",
+    "dataGovIn": "data.gov.in",
+    "updatedRegularly": "Updated regularly",
+    "builtForYou": "Built for you"
+  },
+  "navigation": {
+    "home": "Home",
+    "dashboard": "Dashboard",
+    "calculator": "Profit Calculator",
+    "mapView": "Map View",
+    "landing": "Landing"
+  },
+  "landing": {
+    "title": "Krishi Route",
+    "subtitle": "Agricultural Route Optimization Platform",
+    "description": "Optimize your agricultural supply chain with intelligent route planning and profit calculation",
+    "heroTitle": "Find the most profitable mandi for your crops",
+    "heroDescription": "Live government prices + transport cost = maximum farmer profit.",
+    "getStarted": "Get Started",
+    "highlights": {
+      "liveGovPrices": "Live government mandi prices",
+      "transportAwareProfit": "Transport-aware profit calculation",
+      "smartMandiRecommendations": "Smart mandi recommendations"
+    },
+    "features": {
+      "title": "Features",
+      "routeOptimization": "Route Optimization",
+      "routeOptimizationDesc": "Find the most efficient routes to markets",
+      "profitCalculation": "Profit Calculation",
+      "profitCalculationDesc": "Calculate accurate profits with real-time data",
+      "marketData": "Market Data",
+      "marketDataDesc": "Access comprehensive mandi market information"
+    },
+    "calculatorSection": {
+      "title": "Try it now",
+      "description": "Enter your details below. We'll use live government data to find your best mandi."
+    },
+    "howItWorks": {
+      "title": "How it works",
+      "description": "Four simple steps from your field to best mandi.",
+      "steps": {
+        "selectCrop": {
+          "title": "Select crop & quantity",
+          "description": "Choose your crop and how much you want to sell (in quintals)."
+        },
+        "chooseTransport": {
+          "title": "Choose transport & location",
+          "description": "Pick your vehicle and enter your location for accurate distance."
+        },
+        "fetchPrices": {
+          "title": "Fetch live mandi prices",
+          "description": "We use official government API to get real-time prices across mandis."
+        },
+        "getBestMandi": {
+          "title": "Get best mandi with max profit",
+          "description": "We recommend the mandi that gives you the highest net profit."
+        }
+      }
+    },
+    "whyKrishiRoute": {
+      "title": "Why Krishi-Route?",
+      "description": "Built for Indian farmers, powered by government data.",
+      "benefits": {
+        "higherProfit": {
+          "title": "Higher profit per trip",
+          "desc": "Sell where you earn more, not just where it's nearest."
+        },
+        "verifiedData": {
+          "title": "Verified government data",
+          "desc": "Prices from data.gov.in — transparent and trustworthy."
+        },
+        "transportAware": {
+          "title": "Transport-aware pricing",
+          "desc": "Fuel and vehicle cost included in every recommendation."
+        },
+        "savesTime": {
+          "title": "Saves time & fuel",
+          "desc": "One decision, one route — no guesswork."
+        },
+        "locationBased": {
+          "title": "Location-based results",
+          "desc": "Recommendations based on your actual location."
+        },
+        "farmerFirst": {
+          "title": "Farmer-first design",
+          "desc": "Built for Indian farmers, in your language and context."
+        }
+      }
+    },
+    "mapSection": {
+      "title": "Not the nearest mandi — the smartest mandi",
+      "description": "We show you routes and compare real transport costs so you can choose the mandi that gives you the highest net profit, not just the one closest by.",
+      "features": {
+        "indiaCoverage": "India-wide mandi coverage",
+        "routeAware": "Route-aware distance & cost",
+        "liveComparison": "Live price comparison"
+      },
+      "routeCalculation": "Route-aware profit calculation",
+      "distanceCost": "Distance + vehicle cost = net profit"
+    },
+    "trust": {
+      "description": "Krishi-Route uses only official government mandi price data. No guesswork — just transparent, verifiable numbers to help you make the best selling decision."
+    },
+    "testimonial": {
+      "quote": "Earlier I sold at the nearest mandi. Now I sell at the most profitable mandi.",
+      "author": "Farmer, North India",
+      "uses": "Uses Krishi-Route for onion & potato"
+    },
+    "finalCta": {
+      "title": "Your hard work deserves the best price.",
+      "description": "Join farmers who are already making smarter mandi choices with live government data.",
+      "button": "Find my best mandi"
+    },
+    "footer": {
+      "tagline": "Smart mandi discovery & profit optimization",
+      "builtFor": "Built for Indian farmers 🇮🇳"
+    }
+  },
+  "calculator": {
+    "title": "Profit Calculator",
+    "cropType": "Crop Type",
+    "quantity": "Quantity (quintals)",
+    "sourceMandi": "Source Mandi",
+    "destinationMandi": "Destination Mandi",
+    "transportCost": "Transport Cost per km",
+    "calculateProfit": "Calculate Profit",
+    "vehicleType": "Vehicle Type",
+    "location": "Your Location",
+    "searchLocation": "Search for your location",
+    "useCurrentLocation": "Use Current Location",
+    "enterManually": "Enter Manually",
+    "results": {
+      "title": "Results",
+      "sellingPrice": "Selling Price",
+      "transportCost": "Transport Cost",
+      "handlingCost": "Handling Cost",
+      "handingCost": "Handling Cost",
+      "totalCost": "Total Cost",
+      "netProfit": "Net Profit",
+      "recommendedRoute": "Recommended Route",
+      "bestMandi": "Best Mandi for Maximum Profit"
+    },
+    "crops": {
+      "onion": "Onion",
+      "tomato": "Tomato",
+      "potato": "Potato",
+      "mustard": "Mustard",
+      "cotton": "Cotton",
+      "castorSeed": "Castor Seed",
+      "arhar": "Arhar(Tur/Red Gram)(Whole)",
+      "brinjal": "Brinjal",
+      "mousambi": "Mousambi(Sweet Lime)",
+      "spinach": "Spinach",
+      "sweetPotato": "Sweet Potato",
+      "apple": "Apple",
+      "banana": "Banana",
+      "bhindi": "Bhindi(Ladies Finger)",
+      "cabbage": "Cabbage",
+      "capsicum": "Capsicum",
+      "carrot": "Carrot",
+      "cauliflower": "Cauliflower",
+      "coconut": "Coconut Seed",
+      "cucumbar": "Cucumbar(Kheera)",
+      "garlic": "Garlic",
+      "ginger": "Ginger(Green)",
+      "greenChilli": "Green Chilli",
+      "lemon": "Lemon",
+      "maize": "Maize",
+      "paddy": "Paddy(Common)",
+      "peas": "Peas Wet",
+      "pumpkin": "Pumpkin",
+      "wheat": "Wheat"
+    },
+    "vehicles": {
+      "tataAce": "Tata Ace",
+      "tata407": "Tata 407",
+      "mahindraPickup": "Mahindra Pickup",
+      "tractorTrolley": "Tractor Trolley",
+      "smallTruck": "Small Truck",
+      "largeTruck": "Large Truck"
+    }
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "overview": "Overview",
+    "totalProfit": "Total Profit",
+    "activeRoutes": "Active Routes",
+    "marketsCovered": "Markets Covered",
+    "recentCalculations": "Recent Calculations",
+    "profitChart": "Profit Trends",
+    "marketComparison": "Market Comparison",
+    "results": {
+      "title": "Profit Analysis Results",
+      "crop": "Crop",
+      "quantity": "Quantity",
+      "vehicle": "Vehicle",
+      "bestMandi": "Best Mandi",
+      "totalMandis": "Total Mandis Found",
+      "dataSource": "Data Source"
+    },
+    "profitDetails": {
+      "revenue": "Revenue",
+      "transportCost": "Transport Cost",
+      "fuelCost": "Fuel Cost",
+      "handlingCost": "Handling Cost",
+      "handingCost": "Handling Cost",
+      "totalCost": "Total Cost",
+      "netProfit": "Net Profit",
+      "distance": "Distance",
+      "dieselPrice": "Diesel Price",
+      "price": "Price",
+      "minPrice": "Min Price",
+      "maxPrice": "Max Price",
+      "variety": "Variety",
+      "grade": "Grade",
+      "arrivalDate": "Arrival Date",
+      "perishabilityRisk": "Perishability Risk",
+      "perishabilityWarning": "Perishability Warning"
+    }
+  },
+  "mapView": {
+    "title": "Map View",
+    "searchLocation": "Search location",
+    "currentLocation": "Current Location",
+    "nearbyMarkets": "Nearby Markets",
+    "routeInfo": "Route Information",
+    "distance": "Distance",
+    "estimatedTime": "Estimated Time",
+    "showRoutes": "Show Routes",
+    "yourLocation": "Your Location",
+    "recommendedMandi": "Recommended Mandi",
+    "alternativeMarkets": "Alternative Markets",
+    "routeDetails": "Route Details",
+    "profitDetails": "Profit Details"
+  },
+  "errors": {
+    "networkError": "Network error. Please check your connection.",
+    "dataLoadError": "Failed to load data. Please try again.",
+    "calculationError": "Error in calculation. Please check your inputs.",
+    "locationError": "Unable to get your location.",
+    "noResultsFound": "No results found. Please try different parameters.",
+    "invalidInput": "Invalid input. Please check your entries.",
+    "serverError": "Server error. Please try again later."
+  }
+}
